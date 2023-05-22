@@ -37,8 +37,10 @@ class NearEarthObject:
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
         """
-        self.designation = str(info['pdes'])
-        self.name = str(info['name'])
+        self.designation = info['pdes']
+        self.name = None
+        if info['name']:
+            self.name = info['name']
         self.diameter = float('nan')
         if info['diameter']:
             self.diameter = float(info['diameter'])
@@ -105,8 +107,6 @@ class CloseApproach:
             self.velocity = float(info['v_rel'])
 
         self.neo: NearEarthObject = None
-        if info['neo']:
-            self.neo = info['neo']
 
     @property
     def time_str(self):
