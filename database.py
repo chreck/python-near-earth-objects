@@ -43,10 +43,22 @@ class NEODatabase:
         self._neos: list[NearEarthObject] = neos
         self._approaches: list[CloseApproach] = approaches
 
+        # extra auxiliary attributes for faster search
+        self._neos_by_name = {}
+        self._neos_by_designation = {}
+
+        # iterate through all neos
+        for neo in self._neos:
+            # setup the faster lookup dictionaries
+            self._neos_by_name[neo.name] = neo
+            self._neos_by_designation[neo.designation] = neo
+
+        # iterate through all approaches
         for approach in self._approaches:
             designation = approach._designation
             neo = self.get_neo_by_designation(designation)
             if neo:
+                # link approache to neo and neo to approaches
                 neo.approaches.append(approach)
                 approach.neo = neo
 
@@ -63,10 +75,9 @@ class NEODatabase:
         :param designation: The primary designation of the NEO to search for.
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
-        f = filter(lambda n: n.designation == designation, iter(self._neos))
-        try:
-            return next(f)
-        except StopIteration:
+        if designation in self._neos_by_designation:
+            return self._neos_by_designation[designation]
+        else:
             print(f"No match found for designation '{designation}', check for spelling and capitalization")
         return None
 
@@ -84,10 +95,9 @@ class NEODatabase:
         :param name: The name, as a string, of the NEO to search for.
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
-        f = filter(lambda n: n.name == name, iter(self._neos))
-        try:
-            return next(f)
-        except StopIteration:
+        if name in self._neos_by_name:
+            return self._neos_by_name[name]
+        else:
             print(f"No match found for name '{name}', check for spelling and capitalization")
         return None
 
