@@ -11,6 +11,7 @@ representations display seconds, but NASA's data (and our datetimes!) don't
 provide that level of resolution, so the output format also will not.
 """
 import datetime
+from typing import Iterable
 
 
 def cd_to_datetime(calendar_date):
@@ -42,3 +43,21 @@ def datetime_to_str(dt):
     :return: That datetime, as a human-readable string without seconds.
     """
     return datetime.datetime.strftime(dt, "%Y-%m-%d %H:%M")
+
+def progress(iter: Iterable, every=1000, fun=lambda e: e, start_text="Load", end_text="done."):
+    """Generates a progress indicator and calls fun on every element
+
+    Args:
+        iter (_type_): Iterable to iterate through
+        every (int, optional): Show progress indicator on that index step. Defaults to 1000.
+        fun (lambda, optional): Function with entry parameter on every element. Defaults to lambda e:e.
+        start_text (str, optional): The text which is printed on start of the progress. Defaults is "Load".
+        end_text (str, optional): The text which is printed on the end of the iteration. Defaults is "done.".
+    """
+    for index, next in enumerate(iter):
+        if index == 0:
+            print(start_text, end='', flush=True)
+        if index % every == 0:
+            print(".", end='', flush=True)
+        fun(next)
+    print(end_text, flush=True)

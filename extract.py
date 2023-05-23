@@ -14,6 +14,7 @@ You'll edit this file in Task 2.
 """
 import csv
 import json
+import helpers
 
 from models import NearEarthObject, CloseApproach
 
@@ -27,8 +28,8 @@ def load_neos(neo_csv_path):
     result: list[NearEarthObject] = []
     with open(neo_csv_path, 'r') as f:
         reader = csv.DictReader(f)
-        for entry in reader:
-            result.append(NearEarthObject(**entry))
+        fun = lambda entry: result.append(NearEarthObject(**entry))
+        helpers.progress(reader, every=1000, fun=fun, start_text="Load neo data file", end_text="done.")
     return result
 
 
@@ -43,7 +44,6 @@ def load_approaches(cad_json_path):
         cad = json.load(f)
         fields = cad['fields']
         data = cad['data']
-        for entry in data:
-            ca = dict(zip(fields,entry))
-            result.append(CloseApproach(**ca))
+        fun = lambda entry: result.append(CloseApproach(**dict(zip(fields, entry))))
+        helpers.progress(data, every=15000, fun=fun, start_text="Load approaches data file", end_text="done.")
     return result
