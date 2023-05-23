@@ -37,10 +37,10 @@ class NearEarthObject:
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
         """
-        self.designation = info['pdes']
-        self.name = None
+        self.designation: str = info['pdes']
+        self.name: str = None
         if info['name']:
-            self.name = info['name']
+            self.name: str = info['name']
         self.diameter = float('nan')
         if info['diameter']:
             self.diameter = float(info['diameter'])
@@ -52,7 +52,7 @@ class NearEarthObject:
             self.hazardous = False
 
         # Create an empty initial collection of linked approaches.
-        self.approaches = []
+        self.approaches: list[CloseApproach] = []
 
     @property
     def fullname(self):
@@ -68,9 +68,9 @@ class NearEarthObject:
 
     def __str__(self):
         """Return `str(self)`."""
-        hazardous = "is not"
+        hazardous: str = "is not"
         if self.hazardous:
-            hazardous = "is"
+            hazardous: str = "is"
         return f"NEO {self.fullname} has a diameter of {self.diameter:.3f} km and {hazardous} potenzially hazardous."
 
     def __repr__(self):
