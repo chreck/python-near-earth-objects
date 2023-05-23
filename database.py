@@ -50,8 +50,10 @@ class NEODatabase:
         # iterate through all neos
         for neo in self._neos:
             # setup the faster lookup dictionaries
-            self._neos_by_name[neo.name] = neo
-            self._neos_by_designation[neo.designation] = neo
+            if neo.name:
+                self._neos_by_name[neo.name] = neo
+            if neo.designation:
+                self._neos_by_designation[neo.designation] = neo
 
         # iterate through all approaches
         for approach in self._approaches:
