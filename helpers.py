@@ -55,9 +55,14 @@ def progress(iter: Iterable, every=1000, fun=lambda e: e, start_text="Load", end
         end_text (str, optional): The text which is printed on the end of the iteration. Defaults is "done.".
     """
     for index, next in enumerate(iter):
-        if index == 0:
+        if index == 0 and _RUN_MAIN:
             print(start_text, end='', flush=True)
-        if index % every == 0:
+        if index % every == 0 and _RUN_MAIN:
             print(".", end='', flush=True)
         fun(next)
-    print(end_text, flush=True)
+    if _RUN_MAIN:
+        print(end_text, flush=True)
+
+    """Variable defines if the application is running over the main method or is in unittesting
+    """
+_RUN_MAIN = False

@@ -48,6 +48,7 @@ from extract import load_neos, load_approaches
 from database import NEODatabase
 from filters import create_filters, limit
 from write import write_to_csv, write_to_json
+from helpers import _RUN_MAIN
 
 
 # Paths to the root of the project and the `data` subfolder.
@@ -394,4 +395,5 @@ def main():
 
 
 if __name__ == '__main__':
+    _RUN_MAIN=True
     main()
