@@ -9,6 +9,10 @@ The `datetime_to_str` function converts a Python `datetime` into a string.
 Although `datetime`s already have human-readable string representations, those
 representations display seconds, but NASA's data (and our datetimes!) don't
 provide that level of resolution, so the output format also will not.
+
+The `progress` function creates an progress indicator for Iterables which
+is printed as a simple dot. The start and end text can be defined. The parameter
+`fun` is called on every element in the Iterable.
 """
 import datetime
 from typing import Iterable

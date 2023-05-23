@@ -72,36 +72,59 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Return `repr(self)`, a computer-readable string representation of this object."""
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 
+"""Get date from a close approach.
+
+DateFilter inherits from AttributeFilter
+"""
 class DateFilter(AttributeFilter):
+
     @classmethod
     def get(cls, approach: CloseApproach):
+        """Return the date from a close approach"""
         return approach.time.date()
 
+"""Get distance from a close approach.
 
+DistanceFilter inherits from AttributeFilter
+"""
 class DistanceFilter(AttributeFilter):
     @classmethod
     def get(cls, approach: CloseApproach):
+        """Return the distance from a close approach"""
         return approach.distance
 
+"""Get velocity from a close approach.
 
+VelocityFilter inherits from AttributeFilter
+"""
 class VelocityFilter(AttributeFilter):
     @classmethod
     def get(cls, approach: CloseApproach):
+        """Return the velocity from a close approach"""
         return approach.velocity
 
+"""Get diameter from a near earth object.
 
+DiameterFilter inherits from AttributeFilter
+"""
 class DiameterFilter(AttributeFilter):
     @classmethod
     def get(cls, approach: CloseApproach):
+        """Return the diameter from a near earth object"""
         return approach.neo.diameter
 
+"""Get hazardous from a near earth object.
 
+HazardousFilter inherits from AttributeFilter
+"""
 class HazardousFilter(AttributeFilter):
     @classmethod
     def get(cls, approach: CloseApproach):
+        """Return the hazardous from a near earth object"""
         return approach.neo.hazardous
 
 

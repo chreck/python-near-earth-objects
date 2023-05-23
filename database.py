@@ -130,5 +130,7 @@ class NEODatabase:
         :return: A stream of matching `CloseApproach` objects.
         """
         for approach in self._approaches:
+            # The filter value can be `None`` because we provide in the argument
+            # all subclasses of AttributeFilter
             if all(f(approach) for f in filters if f.value != None):
                 yield approach

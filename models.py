@@ -54,7 +54,6 @@ class NearEarthObject:
         else:
             self.hazardous = False
 
-        # Create an empty initial collection of linked approaches.
         self.approaches: List[CloseApproach] = []
 
     @property
