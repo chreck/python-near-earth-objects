@@ -33,13 +33,8 @@ def write_to_csv(results: Iterable[CloseApproach], filename):
         writer.writeheader()
         for result in results:
             writer.writerow({
-                'datetime_utc': result.time_str,
-                'distance_au': result.distance,
-                'velocity_km_s': result.velocity,
-                'designation': result.neo.designation,
-                'name': result.neo.name,
-                'diameter_km': result.neo.diameter,
-                'potentially_hazardous': result.neo.hazardous,
+                **result.serialize(),
+                **result.neo.serialize()
             })
 
 
@@ -57,15 +52,8 @@ def write_to_json(results: Iterable[CloseApproach], filename):
     dumps = []
     for result in results:
         dump = {
-            "datetime_utc": result.time_str,
-            "distance_au": result.distance,
-            "velocity_km_s": result.velocity,
-            "neo": {
-                "designation": result.neo.designation,
-                "name": result.neo.name,
-                "diameter_km": result.neo.diameter,
-                "potentially_hazardous": result.neo.hazardous,
-            }
+            **result.serialize(),
+            "neo": result.neo.serialize()
         }
         dumps.append(dump)
     with open(filename, 'w') as out:
