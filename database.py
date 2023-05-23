@@ -47,9 +47,10 @@ class NEODatabase:
             designation = approach._designation
             neo = self.get_neo_by_designation(designation)
             if neo:
+                neo.approaches.append(approach)
                 approach.neo = neo
 
-    def get_neo_by_designation(self, designation):
+    def get_neo_by_designation(self, designation) -> NearEarthObject:
         """Find and return an NEO by its primary designation.
 
         If no match is found, return `None` instead.
