@@ -86,8 +86,6 @@ class NEODatabase:
         """
         if designation in self._neos_by_designation:
             return self._neos_by_designation[designation]
-        else:
-            print(f"No match found for designation '{designation}', check for spelling and capitalization")
         return None
 
     def get_neo_by_name(self, name):
@@ -106,8 +104,6 @@ class NEODatabase:
         """
         if name in self._neos_by_name:
             return self._neos_by_name[name]
-        else:
-            print(f"No match found for name '{name}', check for spelling and capitalization")
         return None
 
     def query(self, filters: tuple[AttributeFilter]=()):
