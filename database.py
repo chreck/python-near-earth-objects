@@ -12,6 +12,8 @@ data on NEOs and close approaches extracted by `extract.load_neos` and
 You'll edit this file in Tasks 2 and 3.
 """
 
+from datetime import datetime
+from filters import AttributeFilter
 from models import NearEarthObject, CloseApproach
 
 class NEODatabase:
@@ -64,6 +66,9 @@ class NEODatabase:
                 neo.approaches.append(approach)
                 approach.neo = neo
 
+        # sort all approaches by filter order for faster query
+        self._approaches.sort(key=lambda a: a.time_str+str(a.distance)+str(a.velocity)+str(a.neo.diameter)+str(a.neo.hazardous))
+
     def get_neo_by_designation(self, designation) -> NearEarthObject:
         """Find and return an NEO by its primary designation.
 
@@ -103,7 +108,7 @@ class NEODatabase:
             print(f"No match found for name '{name}', check for spelling and capitalization")
         return None
 
-    def query(self, filters=()):
+    def query(self, filters: tuple[AttributeFilter]=()):
         """Query close approaches to generate those that match a collection of filters.
 
         This generates a stream of `CloseApproach` objects that match all of the
@@ -117,6 +122,6 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-        # TODO: Generate `CloseApproach` objects that match all of the filters.
         for approach in self._approaches:
-            yield approach
+            if all(f(approach) for f in filters if f.value != None):
+                yield approach

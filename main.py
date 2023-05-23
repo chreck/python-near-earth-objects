@@ -195,7 +195,7 @@ def inspect(database, pdes=None, name=None, verbose=False):
     return neo
 
 
-def query(database, args):
+def query(database: NEODatabase, args):
     """Perform the `query` subcommand.
 
     Create a collection of filters with `create_filters` and supply them to the
