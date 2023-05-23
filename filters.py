@@ -155,4 +155,4 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-    return itertools.islice(iterator, n)
+    return itertools.islice(iterator, n if n != 0 else None)
