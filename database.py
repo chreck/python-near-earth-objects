@@ -66,8 +66,10 @@ class NEODatabase:
                 neo.approaches.append(approach)
                 approach.neo = neo
 
-        # sort all approaches by filter order for faster query
-        self._approaches.sort(key=lambda a: a.time_str+str(a.distance)+str(a.velocity)+str(a.neo.diameter)+str(a.neo.hazardous))
+        # needs isinstance test because `test_write` loads the files as tuple, see tests/test_write.py:40
+        if isinstance(self._approaches, list):
+            # sort all approaches by filter order for faster query
+            self._approaches.sort(key=lambda a: a.time_str+str(a.distance)+str(a.velocity)+str(a.neo.diameter)+str(a.neo.hazardous))
 
     def get_neo_by_designation(self, designation) -> NearEarthObject:
         """Find and return an NEO by its primary designation.
