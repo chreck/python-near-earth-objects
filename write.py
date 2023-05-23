@@ -27,15 +27,20 @@ def write_to_csv(results: Iterable[CloseApproach], filename):
     :param results: An iterable of `CloseApproach` objects.
     :param filename: A Path-like object pointing to where the data should be saved.
     """
-    fieldnames = ('datetime_utc', 'distance_au', 'velocity_km_s', 'designation', 'name', 'diameter_km', 'potentially_hazardous')
-    with open(filename, 'w') as out:
+    fieldnames = (
+        "datetime_utc",
+        "distance_au",
+        "velocity_km_s",
+        "designation",
+        "name",
+        "diameter_km",
+        "potentially_hazardous",
+    )
+    with open(filename, "w") as out:
         writer = csv.DictWriter(out, fieldnames=fieldnames)
         writer.writeheader()
         for result in results:
-            writer.writerow({
-                **result.serialize(),
-                **result.neo.serialize()
-            })
+            writer.writerow({**result.serialize(), **result.neo.serialize()})
 
 
 def write_to_json(results: Iterable[CloseApproach], filename):
@@ -51,12 +56,7 @@ def write_to_json(results: Iterable[CloseApproach], filename):
     """
     dumps = []
     for result in results:
-        dump = {
-            **result.serialize(),
-            "neo": result.neo.serialize()
-        }
+        dump = {**result.serialize(), "neo": result.neo.serialize()}
         dumps.append(dump)
-    with open(filename, 'w') as out:
+    with open(filename, "w") as out:
         out.write(json.dumps(dumps, indent=2))
-
-

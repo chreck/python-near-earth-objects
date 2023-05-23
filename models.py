@@ -20,6 +20,7 @@ You'll edit this file in Task 1.
 from helpers import cd_to_datetime, datetime_to_str
 import datetime
 
+
 class NearEarthObject:
     """A near-Earth object (NEO).
 
@@ -32,21 +33,22 @@ class NearEarthObject:
     initialized to an empty collection, but eventually populated in the
     `NEODatabase` constructor.
     """
+
     def __init__(self, **info):
         """Create a new `NearEarthObject`.
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
         """
-        self.designation: str = info['pdes']
+        self.designation: str = info["pdes"]
         self.name: str = None
-        if info['name']:
-            self.name: str = info['name']
-        self.diameter = float('nan')
-        if info['diameter']:
-            self.diameter = float(info['diameter'])
-        if info['pha'] == 'Y':
+        if info["name"]:
+            self.name: str = info["name"]
+        self.diameter = float("nan")
+        if info["diameter"]:
+            self.diameter = float(info["diameter"])
+        if info["pha"] == "Y":
             self.hazardous = True
-        elif info['pha'] == 'N':
+        elif info["pha"] == "N":
             self.hazardous = False
         else:
             self.hazardous = False
@@ -75,8 +77,10 @@ class NearEarthObject:
 
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""
-        return (f"NearEarthObject(designation={self.designation!r}, name={self.name!r}, "
-                f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r})")
+        return (
+            f"NearEarthObject(designation={self.designation!r}, name={self.name!r}, "
+            f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r})"
+        )
 
     def serialize(self):
         return {
@@ -100,19 +104,20 @@ class CloseApproach:
     private attribute, but the referenced NEO is eventually replaced in the
     `NEODatabase` constructor.
     """
+
     def __init__(self, **info):
         """Create a new `CloseApproach`.
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
         """
-        self._designation = str(info['des'])
-        self.time: datetime.datetime = cd_to_datetime(info['cd'])
-        self.distance = float('nan')
-        if info['dist']:
-            self.distance = float(info['dist'])
-        self.velocity = float('nan')
-        if info['v_rel']:
-            self.velocity = float(info['v_rel'])
+        self._designation = str(info["des"])
+        self.time: datetime.datetime = cd_to_datetime(info["cd"])
+        self.distance = float("nan")
+        if info["dist"]:
+            self.distance = float(info["dist"])
+        self.velocity = float("nan")
+        if info["v_rel"]:
+            self.velocity = float(info["v_rel"])
 
         self.neo: NearEarthObject = None
 
@@ -140,8 +145,10 @@ class CloseApproach:
 
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""
-        return (f"CloseApproach(time={self.time_str!r}, distance={self.distance:.2f}, "
-                f"velocity={self.velocity:.2f}, neo={self.neo!r})")
+        return (
+            f"CloseApproach(time={self.time_str!r}, distance={self.distance:.2f}, "
+            f"velocity={self.velocity:.2f}, neo={self.neo!r})"
+        )
 
     def serialize(self):
         return {

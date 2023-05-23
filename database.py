@@ -16,6 +16,7 @@ from datetime import datetime
 from filters import AttributeFilter
 from models import NearEarthObject, CloseApproach
 
+
 class NEODatabase:
     """A database of near-Earth objects and their close approaches.
 
@@ -24,6 +25,7 @@ class NEODatabase:
     help fetch NEOs by primary designation or by name and to help speed up
     querying for close approaches that match criteria.
     """
+
     def __init__(self, neos: list[NearEarthObject], approaches: list[CloseApproach]):
         """Create a new `NEODatabase`.
 
@@ -69,7 +71,13 @@ class NEODatabase:
         # needs isinstance test because `test_write` loads the files as tuple, see tests/test_write.py:40
         if isinstance(self._approaches, list):
             # sort all approaches by filter order for faster query
-            self._approaches.sort(key=lambda a: a.time_str+str(a.distance)+str(a.velocity)+str(a.neo.diameter)+str(a.neo.hazardous))
+            self._approaches.sort(
+                key=lambda a: a.time_str
+                + str(a.distance)
+                + str(a.velocity)
+                + str(a.neo.diameter)
+                + str(a.neo.hazardous)
+            )
 
     def get_neo_by_designation(self, designation) -> NearEarthObject:
         """Find and return an NEO by its primary designation.
@@ -106,7 +114,7 @@ class NEODatabase:
             return self._neos_by_name[name]
         return None
 
-    def query(self, filters: tuple[AttributeFilter]=()):
+    def query(self, filters: tuple[AttributeFilter] = ()):
         """Query close approaches to generate those that match a collection of filters.
 
         This generates a stream of `CloseApproach` objects that match all of the

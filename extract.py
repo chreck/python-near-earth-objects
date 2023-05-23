@@ -26,10 +26,16 @@ def load_neos(neo_csv_path):
     :return: A collection of `NearEarthObject`s.
     """
     result: list[NearEarthObject] = []
-    with open(neo_csv_path, 'r') as f:
+    with open(neo_csv_path, "r") as f:
         reader = csv.DictReader(f)
         fun = lambda entry: result.append(NearEarthObject(**entry))
-        helpers.progress(reader, every=1000, fun=fun, start_text="Load neo data file", end_text="done.")
+        helpers.progress(
+            reader,
+            every=1000,
+            fun=fun,
+            start_text="Load neo data file",
+            end_text="done.",
+        )
     return result
 
 
@@ -40,10 +46,16 @@ def load_approaches(cad_json_path):
     :return: A collection of `CloseApproach`es.
     """
     result: list[CloseApproach] = []
-    with open(cad_json_path, 'r') as f:
+    with open(cad_json_path, "r") as f:
         cad = json.load(f)
-        fields = cad['fields']
-        data = cad['data']
+        fields = cad["fields"]
+        data = cad["data"]
         fun = lambda entry: result.append(CloseApproach(**dict(zip(fields, entry))))
-        helpers.progress(data, every=15000, fun=fun, start_text="Load approaches data file", end_text="done.")
+        helpers.progress(
+            data,
+            every=15000,
+            fun=fun,
+            start_text="Load approaches data file",
+            end_text="done.",
+        )
     return result
