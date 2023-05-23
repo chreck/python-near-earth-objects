@@ -20,6 +20,7 @@ You'll edit this file in Task 1.
 from helpers import cd_to_datetime, datetime_to_str
 import datetime
 
+from typing import List
 
 class NearEarthObject:
     """A near-Earth object (NEO).
@@ -54,7 +55,7 @@ class NearEarthObject:
             self.hazardous = False
 
         # Create an empty initial collection of linked approaches.
-        self.approaches: list[CloseApproach] = []
+        self.approaches: List[CloseApproach] = []
 
     @property
     def fullname(self):

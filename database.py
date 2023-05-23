@@ -16,6 +16,7 @@ from datetime import datetime
 from filters import AttributeFilter
 from models import NearEarthObject, CloseApproach
 
+from typing import List, Tuple
 
 class NEODatabase:
     """A database of near-Earth objects and their close approaches.
@@ -26,7 +27,7 @@ class NEODatabase:
     querying for close approaches that match criteria.
     """
 
-    def __init__(self, neos: list[NearEarthObject], approaches: list[CloseApproach]):
+    def __init__(self, neos: List[NearEarthObject], approaches: List[CloseApproach]):
         """Create a new `NEODatabase`.
 
         As a precondition, this constructor assumes that the collections of NEOs
@@ -44,8 +45,8 @@ class NEODatabase:
         :param neos: A collection of `NearEarthObject`s.
         :param approaches: A collection of `CloseApproach`es.
         """
-        self._neos: list[NearEarthObject] = neos
-        self._approaches: list[CloseApproach] = approaches
+        self._neos: List[NearEarthObject] = neos
+        self._approaches: List[CloseApproach] = approaches
 
         # extra auxiliary attributes for faster search
         self._neos_by_name = {}
@@ -114,7 +115,7 @@ class NEODatabase:
             return self._neos_by_name[name]
         return None
 
-    def query(self, filters: tuple[AttributeFilter] = ()):
+    def query(self, filters: Tuple[AttributeFilter] = ()):
         """Query close approaches to generate those that match a collection of filters.
 
         This generates a stream of `CloseApproach` objects that match all of the

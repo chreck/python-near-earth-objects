@@ -19,6 +19,7 @@ import helpers
 
 from models import NearEarthObject, CloseApproach
 
+from typing import List
 
 def load_neos(neo_csv_path):
     """Read near-Earth object information from a CSV file.
@@ -26,7 +27,7 @@ def load_neos(neo_csv_path):
     :param neo_csv_path: A path to a CSV file containing data about near-Earth objects.
     :return: A collection of `NearEarthObject`s.
     """
-    result: list[NearEarthObject] = []
+    result: List[NearEarthObject] = []
     with open(neo_csv_path, "r") as f:
         reader = csv.DictReader(f)
         fun = lambda entry: result.append(NearEarthObject(**entry))
@@ -48,7 +49,7 @@ def load_approaches(cad_json_path):
     :param neo_csv_path: A path to a JSON file containing data about close approaches.
     :return: A collection of `CloseApproach`es.
     """
-    result: list[CloseApproach] = []
+    result: List[CloseApproach] = []
     with open(cad_json_path, "r") as f:
         cad = json.load(f)
         fields = cad["fields"]
