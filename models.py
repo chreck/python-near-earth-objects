@@ -83,6 +83,11 @@ class NearEarthObject:
         )
 
     def serialize(self):
+        """Serialize the NearEarthObject object for writing
+
+        Returns:
+            dict: The dictionary for serialization
+        """
         return {
             "designation": self.designation,
             "name": self.name,
@@ -151,6 +156,11 @@ class CloseApproach:
         )
 
     def serialize(self):
+        """Serialize the CloseApproach object for writing
+
+        Returns:
+            dict: The dictionary for serialization
+        """
         return {
             "datetime_utc": self.time_str,
             "distance_au": self.distance,

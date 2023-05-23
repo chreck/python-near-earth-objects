@@ -56,9 +56,9 @@ def progress(
     """Generates a progress indicator and calls fun on every element
 
     Args:
-        iter (_type_): Iterable to iterate through
-        every (int, optional): Show progress indicator on that index step. Defaults to 1000.
-        fun (lambda, optional): Function with entry parameter on every element. Defaults to lambda e:e.
+        iter (Iterable): Iterable to iterate through
+        every (int, optional): Show progress indicator on that index step. Default is 1000.
+        fun (lambda, optional): Function with parameter entry which is called for every element in `iter`. Defaults to lambda e:e.
         start_text (str, optional): The text which is printed on start of the progress. Default is "Load".
         end_text (str, optional): The text which is printed on the end of the iteration. Default is "done.".
         suppress (bool, optional): Dont show the indicator at all. Default is True.
