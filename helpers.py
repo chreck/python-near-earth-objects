@@ -57,7 +57,7 @@ def progress(
     end_text="done.",
     suppress=True,
 ):
-    """Generates a progress indicator and calls fun on every element
+    """Generate a progress indicator and calls fun on every element.
 
     Args:
         iter (Iterable): Iterable to iterate through

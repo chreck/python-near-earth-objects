@@ -81,7 +81,7 @@ class NearEarthObject:
         )
 
     def serialize(self):
-        """Serialize the NearEarthObject object for writing
+        """Serialize the NearEarthObject object for writing.
 
         Returns:
             dict: The dictionary for serialization
@@ -154,7 +154,7 @@ class CloseApproach:
         )
 
     def serialize(self):
-        """Serialize the CloseApproach object for writing
+        """Serialize the CloseApproach object for writing.
 
         Returns:
             dict: The dictionary for serialization
